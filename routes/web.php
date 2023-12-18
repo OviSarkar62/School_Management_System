@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\HomeController;
@@ -68,9 +69,10 @@ Route::get('admin/grade/assign', [GradeController::class, 'assignSubject'])->nam
 Route::post('admin/grade/store-assign', [GradeController::class, 'storeAssignedSubject'])->name('store-assign.grade');
 
 // Attendance Routes
-Route::get('admin/subject/create', [SubjectController::class, 'create'])->name('create.subject');
-Route::post('admin/subject/store', [SubjectController::class, 'store'])->name('store.subject');
-Route::get('admin/subject/index', [SubjectController::class, 'index'])->name('index.subject');
-Route::get('admin/subject/edit', [SubjectController::class, 'edit'])->name('edit.subject');
-Route::put('admin/subject/update', [SubjectController::class, 'update'])->name('update.subject');
-Route::delete('admin/subject/destroy', [SubjectController::class, 'destroy'])->name('destroy.subject');
+Route::get('admin/attendance/create', [AttendanceController::class, 'create'])->name('create.attendance');
+Route::post('admin/attendance/store', [AttendanceController::class, 'store'])->name('store.attendance');
+Route::get('admin/attendance/index', [AttendanceController::class, 'index'])->name('index.attendance');
+Route::get('admin/attendance/show', [AttendanceController::class, 'show'])->name('show.attendance');
+
+
+

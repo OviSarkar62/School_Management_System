@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    public function createByTeacher($classid)
+    public function create($classid)
     {
         $class = Grade::with(['students','subjects','teacher'])->findOrFail($classid);
 
-        return view('backend.attendance.create', compact('class'));
+        return view('admin-views.attendances.create', compact('class'));
     }
     public function store(Request $request)
     {
@@ -83,7 +83,7 @@ class AttendanceController extends Controller
                                      ->get()
                                      ->groupBy(['class_id','attendence_date']);
 
-                return view('backend.attendance.index', compact('attendances','months'));
+                return view('admin-views.attendances.index', compact('attendances','months'));
 
             }
 
@@ -96,6 +96,6 @@ class AttendanceController extends Controller
     {
         $attendances = Attendance::where('student_id',$attendance->id)->get();
 
-        return view('backend.attendance.show', compact('attendances'));
+        return view('admin-views.attendances.show', compact('attendances'));
     }
 }
