@@ -19,46 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
-    <style>
-        /* Custom styles for the compact navbar */
-        .navbar-nav .nav-link:hover {
-            color: #007bff; /* Set hover color for the nav links */
-        }
 
-        /* Styles for the dashboard page */
-        .dashboard-container .card {
-            height: 200px;
-            width: 300px;
-            background-color: #232D3F; /* Set a background color for the cards */
-            color: #333; /* Set text color for the cards */
-        }
-
-        /* Style for the card header */
-        .dashboard-container .card-header {
-            background-color: #232D3F; /* Set a background color for the card header */
-            color: #fff; /* Set text color for the card header */
-        }
-
-        /* Style for the card body */
-        .dashboard-container .card-body {
-            background-color: #fff; /* Set a background color for the card body */
-        }
-
-        /* Style for the toggle button */
-        .dashboard-container .toggle-todo {
-            background-color: #D80032; /* Set a background color for the toggle button */
-            color: #fff; /* Set text color for the toggle button */
-        }
-
-        /* Additional style for completed items */
-        .dashboard-container .toggle-todo.completed {
-            background-color: #005B41; /* Change button background color for completed tasks */
-        }
-
-        .dashboard-container .checked {
-            text-decoration: line-through;
-        }
-    </style>
 </head>
 
 <body>
