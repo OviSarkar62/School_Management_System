@@ -21,12 +21,17 @@
     <link href="css/styles.css" rel="stylesheet" />
 
 </head>
+<style>
+    body {
+        margin-top: 80px; /* Adjust this value based on your navbar height */
+    }
+</style>
 
 <body>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('user.dashboard') }}">School Management System</a>
+            <a class="navbar-brand">School Management System</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,6 +50,65 @@
             </div>
         </div>
     </nav>
+     <!-- Sidebar -->
+     @if(Auth::check())
+     <div class="container-fluid" id="wrapper">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <!-- Admin Dashboard -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('dashboard.admin') }}">
+                                Dashboard
+                            </a>
+                        </li>
+
+                        <!-- Teacher Routes -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('index.teacher') }}">
+                                Teachers
+                            </a>
+                        </li>
+
+                        <!-- Student Routes -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('index.student') }}">
+                                Students
+                            </a>
+                        </li>
+
+                        <!-- Parents Routes -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('index.parents') }}">
+                                Parents
+                            </a>
+                        </li>
+
+                        <!-- Subject Routes -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('index.subject') }}">
+                                Subjects
+                            </a>
+                        </li>
+
+                        <!-- Grade Routes -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('index.grade') }}">
+                                Grades
+                            </a>
+                        </li>
+
+                        <!-- Attendance Routes -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('index.attendance') }}">
+                                Attendance
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            @endif
     <!-- ... (your existing body content) ... -->
     @yield('content')
     <!-- Bootstrap JS Bundle with Popper.js -->

@@ -13,7 +13,6 @@ class TeacherController extends Controller
     {
         return view('admin-views.teachers.create');
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -27,23 +26,28 @@ class TeacherController extends Controller
             'permanent_address' => 'required|string|max:255'
         ]);
 
+        $role = 'teacher';
+
         $user = User::create([
             'name'      => $request->name,
             'email'     => $request->email,
-            'password'  => bcrypt(request('password')),
+            'password'  => bcrypt($request->password),
+            'role'      => $role
         ]);
 
         if ($request->hasFile('profile_picture')) {
-            $profile = Str::slug($user->name).'-'.$user->id.'.'.$request->profile_picture->getClientOriginalExtension();
+            $profile = Str::slug($user->name) . '-' . $user->id . '.' . $request->profile_picture->getClientOriginalExtension();
             $request->profile_picture->move(public_path('images/profile'), $profile);
         } else {
             $profile = 'avatar.png';
         }
+
         $user->update([
             'profile_picture' => $profile
         ]);
 
-        $user->teacher()->create([
+        $teacher = Teacher::create([
+            'user_id'           => $user->id,
             'gender'            => $request->gender,
             'phone'             => $request->phone,
             'dateofbirth'       => $request->dateofbirth,
@@ -51,7 +55,6 @@ class TeacherController extends Controller
             'permanent_address' => $request->permanent_address
         ]);
 
-        $user->assignRole('Teacher');
 
         return redirect()->route('index.teacher');
     }
@@ -63,18 +66,20 @@ class TeacherController extends Controller
         return view('admin-views.teachers.index', compact('teachers'));
     }
 
-    public function edit(Teacher $teacher)
+    public function edit(Teacher $teacher, $id)
     {
-        $teacher = Teacher::with('user')->findOrFail($teacher->id);
 
+        // $teacher = Teacher::with('user')->findOrFail($teacher->id);
+        $teacher = Teacher::with('user')->where('id', $id)->firstOrFail();
         return view('admin-views.teachers.edit', compact('teacher'));
     }
 
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name'              => 'required|string|max:255',
-            'email'             => 'required|string|email|max:255|unique:users,email,'.$teacher->user_id,
+            'email'             => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password'          => 'sometimes|string|min:8',
             'gender'            => 'required|string',
             'phone'             => 'required|string|max:255',
             'dateofbirth'       => 'required|date',
@@ -82,22 +87,27 @@ class TeacherController extends Controller
             'permanent_address' => 'required|string|max:255'
         ]);
 
-        $user = User::findOrFail($teacher->user_id);
+        $teacher = Teacher::where('id', $id)->firstOrFail();
+        dd($teacher);
+        $user = $teacher->user_id;
+        $user->update([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => $request->has('password') ? bcrypt($request->password) : $user->password,
+        ]);
 
         if ($request->hasFile('profile_picture')) {
-            $profile = Str::slug($user->name).'-'.$user->id.'.'.$request->profile_picture->getClientOriginalExtension();
+            $profile = Str::slug($user->name) . '-' . $user->id . '.' . $request->profile_picture->getClientOriginalExtension();
             $request->profile_picture->move(public_path('images/profile'), $profile);
         } else {
-            $profile = $user->profile_picture;
+            $profile = $user->profile_picture; // Keep the existing profile picture if not updated
         }
 
         $user->update([
-            'name'              => $request->name,
-            'email'             => $request->email,
-            'profile_picture'   => $profile
+            'profile_picture' => $profile
         ]);
 
-        $user->teacher()->update([
+        $teacher->update([
             'gender'            => $request->gender,
             'phone'             => $request->phone,
             'dateofbirth'       => $request->dateofbirth,
@@ -105,8 +115,10 @@ class TeacherController extends Controller
             'permanent_address' => $request->permanent_address
         ]);
 
-        return redirect()->route('update.teacher');
+        return redirect()->route('index.teacher');
     }
+
+
 
     public function destroy(Teacher $teacher)
     {
