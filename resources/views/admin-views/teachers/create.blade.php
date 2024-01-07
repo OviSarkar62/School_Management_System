@@ -90,7 +90,7 @@
             <textarea id="permanent_address" name="permanent_address" rows="4" required>{{ old('permanent_address') }}</textarea>
 
             <label for="image">Image:</label>
-            <input type="file" id="image" name="profile_picture" accept="image/*" required>
+            <input type="file" id="image" name="profile_picture" accept="image/*">
 
             <button type="submit">Create Teacher</button>
         </form>
