@@ -12,26 +12,26 @@ class SubjectController extends Controller
     public function create()
     {
         $teachers = Teacher::latest()->get();
-
         return view('admin-views.subjects.create', compact('teachers'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name'          => 'required|string|max:255|unique:subjects',
-            'subject_code'  => 'required|numeric',
-            'teacher_id'    => 'required|numeric',
-            'description'   => 'required|string|max:255'
-        ]);
+        // $request->validate([
+        //     'name'          => 'required|string|max:255|unique:subjects',
+        //     'subject_code'  => 'required|numeric',
+        //     'teacher_id'    => 'required|numeric',
+        //     'description'   => 'required|string|max:255'
+        // ]);
 
-        Subject::create([
+        $subject = Subject::create([
             'name'          => $request->name,
             'slug'          => Str::slug($request->name),
             'subject_code'  => $request->subject_code,
             'teacher_id'    => $request->teacher_id,
             'description'   => $request->description
         ]);
+
 
         return redirect()->route('index.subject');
     }

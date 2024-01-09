@@ -91,14 +91,24 @@
                         <!-- Parents Routes -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('index.parents') }}">
-                                Parents
+                                Parents Index
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('create.parents') }}">
+                                Parents Create
                             </a>
                         </li>
 
                         <!-- Subject Routes -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('index.subject') }}">
-                                Subjects
+                                Subjects Index
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('create.subject') }}">
+                                Subjects Create
                             </a>
                         </li>
 
