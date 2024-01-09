@@ -67,14 +67,24 @@
                         <!-- Teacher Routes -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('index.teacher') }}">
-                                Teachers
+                                Teachers Index
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('create.teacher') }}">
+                                Teachers Create
                             </a>
                         </li>
 
                         <!-- Student Routes -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('index.student') }}">
-                                Students
+                                Students Index
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('create.student') }}">
+                                Students Create
                             </a>
                         </li>
 
