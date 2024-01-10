@@ -42,9 +42,10 @@ class SubjectController extends Controller
         return view('admin-views.subjects.index', compact('subjects'));
 
     }
-    public function edit(Subject $subject)
+    public function edit(Subject $subject, $id)
     {
         $teachers = Teacher::latest()->get();
+        $subject = Subject::where('id', $id)->firstOrFail();
 
         return view('admin-views.subjects.edit', compact('subject','teachers'));
     }
