@@ -44,19 +44,21 @@ class SubjectController extends Controller
     }
     public function edit(Subject $subject, $id)
     {
+
         $teachers = Teacher::latest()->get();
-        $subject = Subject::where('id', $id)->firstOrFail();
+
+        $subject = Subject::with('teacher')->where('id', $id)->first();
 
         return view('admin-views.subjects.edit', compact('subject','teachers'));
     }
-    public function update(Request $request, Subject $subject)
+    public function update(Request $request, Subject $subject, $id)
     {
-        $request->validate([
-            'name'          => 'required|string|max:255|unique:subjects,name,'.$subject->id,
-            'subject_code'  => 'required|numeric',
-            'teacher_id'    => 'required|numeric',
-            'description'   => 'required|string|max:255'
-        ]);
+        // $request->validate([
+        //     'name'          => 'required|string|max:255|unique:subjects,name,'.$subject->id,
+        //     'subject_code'  => 'required|numeric',
+        //     'teacher_id'    => 'required|numeric',
+        //     'description'   => 'required|string|max:255'
+        // ]);
 
         $subject->update([
             'name'          => $request->name,
@@ -65,6 +67,7 @@ class SubjectController extends Controller
             'teacher_id'    => $request->teacher_id,
             'description'   => $request->description
         ]);
+
 
         return redirect()->route('index.subject');
     }

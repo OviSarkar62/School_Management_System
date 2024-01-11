@@ -61,13 +61,13 @@
 
         <form action="{{ route('update.subject', ['id' => $subject->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PATCH')
+            @method('PUT')
 
             <label for="name">Subject Name:</label>
             <input type="text" id="name" name="name" value="{{ old('subject_name', $subject->name) }}" required>
 
             <label for="subject_code">Subject Code:</label>
-            <input type="text" id="subject_code" name="subject_code" value="{{ old('subject_code', $subject->code) }}" required>
+            <input type="text" id="subject_code" name="subject_code" value="{{ old('subject_code', $subject->subject_code) }}" required>
 
             <label for="description">Subject Description:</label>
             <textarea id="description" name="description" rows="4" required>{{ old('subject_description', $subject->description) }}</textarea>

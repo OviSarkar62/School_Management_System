@@ -67,8 +67,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::post('store', [SubjectController::class, 'store'])->name('store.subject');
         Route::get('index', [SubjectController::class, 'index'])->name('index.subject');
         Route::get('edit/{id}', [SubjectController::class, 'edit'])->name('edit.subject');
-        Route::put('update', [SubjectController::class, 'update'])->name('update.subject');
-        Route::delete('destroy', [SubjectController::class, 'destroy'])->name('destroy.subject');
+        Route::put('update/{id}', [SubjectController::class, 'update'])->name('update.subject');
+        Route::delete('destroy/{id}', [SubjectController::class, 'destroy'])->name('destroy.subject');
     });
 
     // Grade Routes

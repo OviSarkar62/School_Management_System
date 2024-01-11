@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ $subject->name }}</td>
                         <td>{{ $subject->subject_code }}</td>
-                        <td>{{ $subject->teacher->user->name }}</td> <!-- Accessing teacher's name -->
+                        <td>{{ $subject->teacher->user->name }}</td>
                         <td>{{ $subject->description }}</td>
                         <td>
                             <a href="{{ route('edit.subject', ['id' => $subject->id]) }}" class="btn btn-primary btn-sm">Edit</a>
